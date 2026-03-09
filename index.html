@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>RunManiac Horror</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: black;
+            /* Фон: 4 линии, две резко уходят вниз и вправо */
+            background-image: url('data:image/svg+xml;utf8,<svg width="1200" height="1800" viewBox="0 0 1200 1800" xmlns="http://www.w3.org/2000/svg"><!-- Линия 1: плавная извилистая --><path d="M150 120 C 200 70, 300 200, 400 120 S 600 50, 750 120" stroke="red" stroke-width="0.5" fill="none" opacity="0.7"/><!-- Линия 2: плавная в нижней части --><path d="M100 1000 C 250 1100, 400 900, 550 1000 S 750 1150, 950 1000" stroke="red" stroke-width="0.5" fill="none" opacity="0.8"/><!-- Линия 3: резко уходит вниз и вправо до правого нижнего угла --><path d="M50 200 C 200 900, 500 1500, 1150 1750" stroke="red" stroke-width="0.5" fill="none" opacity="0.6"/><!-- Линия 4: тоже резко уходит вниз и вправо, другой изгиб --><path d="M200 400 C 600 1100, 800 1600, 1100 1700" stroke="red" stroke-width="0.5" fill="none" opacity="0.7"/></svg>');
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-position: center top;
+            background-size: cover;
+            color: white;
+            text-align: center;
+            padding-top: 50px;
+            margin: 0;
+            min-height: 100vh;
+            font-size: 18px;
+        }
+        
+        h1 {
+            font-size: 120px;
+            color: red;
+            margin-bottom: 10px;
+            animation: blink 1s infinite alternate;
+            font-weight: 900;
+            text-shadow: 0 0 20px red, 0 0 40px #ff4444;
+        }
+        
+        @keyframes blink {
+            from { opacity: 1; text-shadow: 0 0 20px red, 0 0 40px #ff4444; }
+            to { opacity: 0.7; text-shadow: 0 0 30px #ff6666, 0 0 60px #ff0000; }
+        }
+        
+        .intro-text {
+            font-size: 32px;
+            line-height: 1.5;
+            max-width: 80%;
+            margin: auto;
+            font-weight: bold;
+            text-shadow: 2px 2px 5px black;
+        }
+        
+        button {
+            display: inline-block;
+            padding: 16px 32px;
+            font-size: 22px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            user-select: none;
+            outline: none;
+            position: relative;
+            overflow: hidden;
+            border: none;
+            font-weight: bold;
+        }
+
+        #read-more-btn {
+            background-color: #f26b6b;
+            color: white;
+            margin-top: 20px;
+            transition: transform 0.2s, box-shadow 0.2s, background-color 0.2s;
+        }
+
+        #read-more-btn:hover {
+            transform: scale(1.05);
+            background-color: #ff4d4d;
+            box-shadow: 0 0 15px red;
+        }
+
+        #read-more-btn:active {
+            transform: scale(0.95);
+        }
+
+        #download-btn {
+            background-color: #ffd700;
+            color: black;
+            margin-top: 40px;
+            transition: transform 0.2s, box-shadow 0.2s, background-color 0.2s;
+        }
+
+        #download-btn:hover {
+            transform: scale(1.05);
+            background-color: #ffed4d;
+            box-shadow: 0 0 20px gold;
+        }
+
+        #download-btn:active {
+            transform: scale(0.95);
+        }
+        
+        .rules-block {
+            font-size: 22px;
+            line-height: 1.6;
+            max-width: 80%;
+            margin: 20px auto;
+            background: rgba(0,0,0,0.7);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: left;
+            scroll-margin-top: 20px;
+            font-weight: bold;
+        }
+
+        #rules-short {
+            display: block;
+        }
+
+        #rules-full {
+            display: none;
+        }
+        
+        .image-gallery {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+            margin: 40px 0;
+        }
+        
+        .image-gallery img {
+            width: 80%;
+            max-width: 800px;
+            height: auto;
+            border: 3px solid red;
+            box-shadow: 0 0 20px rgba(255,0,0,0.5);
+            object-fit: cover;
+        }
+        
+        .beta-section {
+            position: relative;
+            overflow: hidden;
+            padding-top: 50px;
+        }
+        
+        .in-development {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 36px;
+            font-weight: bold;
+            text-shadow: 2px 2px 5px black;
+        }
+        
+        .beta-section button {
+            font-size: 32px;
+            padding: 24px 48px;
+            margin: 0 10px;
+        }
+        
+        footer {
+            font-size: 14px;
+            color: grey;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+    
+    <h1><strong>RUNMANIAC<br/>HORROR</strong></h1>
+    <div class="intro-text">Добро пожаловать в RunManiac Horror!</div>
+    <p class="intro-text">Погрузитесь в мир ужасов и попробуйте выбраться живым.</p>
+    
+    <div id="rules-short" class="rules-block">
+        <strong>Цель:</strong> в игре будет 3 маньяка, и надо будет от них сбежать.<br/>
+        <strong>Будет 3 этажа:</strong><br/>
+        &nbsp;&nbsp;- На 1 этаже будет 1 маньяк, который плохо слышит.
+    </div>
+    
+    <div id="rules-full" class="rules-block">
+        &nbsp;&nbsp;- На 2 этаже тоже 1 и тут должна быть кнопка 'читать далее', когда нажимаешь на неё открывается весь текст: маньяк, который уже плохо видит.<br/>
+        &nbsp;&nbsp;- На 3 этаже, хорошо слышит и хорошо видит.<br/><br/>
+        
+        Чтобы сбежать с 1 этажа, надо найти ключи (3 ключа) и код от замка.<br/>
+        Со 2 этажа надо будет найти молоток, ключи (5 ключей) и найти код от замка.<br/>
+        С 3 — надо найти ключи (10 ключей), код от замка (2): 1 код, как обычно, 2 код — он будет расположен в начальной комнате на ноутбуке (код разный), молот, отвертку и ножницы.<br/><br/>
+        
+        Если вас поймал маньяк, вы будете в какой-то комнате на этаже, где он поймал.<br/>
+        На каждом этаже будет по 2 комнаты .<br/><br/>
+        
+        <strong>У вас будет 5 попыток.</strong>
+    </div>
+    
+    <button id="read-more-btn">Читать далее</button>
+    <button id="download-btn">Скачать</button>
+    
+    <!-- Галерея: 4 существующих фото + 6 заглушек (вы сможете заменить ссылки) -->
+    <div class="image-gallery">
+        <!-- Существующие 4 фото -->
+        <img src="https://giga.chat/gigachat/files/public/generated/9ce55c58-8813-472f-a287-579cd8695c2a" alt="Image 1"/>
+        <img src="https://i.ibb.co/W44Vf3kx/IMG-20260227-061849-454.jpg" alt="IMG 20260227 061849 454"/>
+        <!-- Третье фото обновлено по вашей просьбе -->
+        <img src="https://i.ibb.co/nsRSMpY0/Screenshot-20260227-125126.jpg" alt="Screenshot 20260227 125126"/>
+        <img src="https://i.ibb.co/zhP7dnGH/Screenshot-20260227-060042.jpg" alt="Screenshot 20260227 060042"/>
+        
+        <!-- 6 мест для ваших будущих фото (заглушки) -->
+        <img src="https://via.placeholder.com/800x400/333/fff?text=Место+для+фото+1" alt="добавиться позже 1"/>
+        <img src="https://via.placeholder.com/800x400/333/fff?text=Место+для+фото+2" alt="добавиться позже  2"/>
+        <img src="https://via.placeholder.com/800x400/333/fff?text=Место+для+фото+3" alt=добавиться позже 3"/>
+        <img src="https://via.placeholder.com/800x400/333/fff?text=Место+для+фото+4" alt="добавиться позже 4"/>
+        <img src="https://via.placeholder.com/800x400/333/fff?text=Место+для+фото+5" alt="добавиться позже 5"/>
+        <img src="https://via.placeholder.com/800x400/333/fff?text=Место+для+фото+6" alt="добавиться позже 6"/>
+    </div>
+    
+    <section class="beta-section">
+        <span class="in-development">В разработке</span>
+        <div style="display:flex; justify-content:center; gap:20px;">
+            <button>BETA 📱</button>
+            <button>ANDROID 📱</button>
+            <button>PC 🖥️</button>
+        </div>
+    </section>
+    
+    <footer>&lt;&lt;jodik&gt;&gt;</footer>
+
+    <script>
+        function playBeep() {
+            try {
+                const AudioContext = window.AudioContext || window.webkitAudioContext;
+                const ctx = new AudioContext();
+                const oscillator = ctx.createOscillator();
+                const gainNode = ctx.createGain();
+                
+                oscillator.type = 'sine';
+                oscillator.frequency.value = 800;
+                gainNode.gain.value = 0.1;
+                
+                oscillator.connect(gainNode);
+                gainNode.connect(ctx.destination);
+                
+                oscillator.start();
+                oscillator.stop(ctx.currentTime + 0.1);
+            } catch (e) {}
+        }
+
+        document.getElementById('read-more-btn').addEventListener('click', function() {
+            const rulesFull = document.getElementById('rules-full');
+            if (rulesFull.style.display === 'none' || rulesFull.style.display === '') {
+                rulesFull.style.display = 'block';
+                rulesFull.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            } else {
+                rulesFull.style.display = 'none';
+            }
+            playBeep();
+        });
+        
+        document.getElementById('download-btn').addEventListener('click', function() {
+            window.scrollTo({top: document.body.scrollHeight, behavior: 'smooth'});
+            playBeep();
+        });
+    </script>
+</body>
+</html>
